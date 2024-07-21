@@ -13,26 +13,22 @@ jobs:
             - name: Execute Cowsay
               run: cowsay -f dragon "Run for cover, I am a DRAGON....RAWR" >> dragon.txt
 
-            - name: Sleep for 5 seconds
-              run: sleep 5
+            - name: Upload Build Artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: dragon-file-artifact
+                path: dragon.txt
 
-            # - name: Checkout Repo
-            #   uses: actions/checkout@v4
-
-            # - name: List the files
-            #   run: ls -altr
-
-            # - name: Executing the Script
-            #   run: |
-            #     chmod +x ascii-script.sh
-            #     ./ascii-script.sh
 
     test_job_2:
         needs: build_job_1
         runs-on: ubuntu-latest
         steps:
-            - name: Sleep for 2 seconds
-              run: sleep 2
+            - name: Download Build Artifact
+              uses: actions/download-artifact@v4
+              with:
+                name: dragon-file-artifact
+                path: dragon.txt
 
             - name: Test file exists
               run: grep -i "dragon" dragon.txt
@@ -41,6 +37,12 @@ jobs:
         needs: [test_job_2]
         runs-on: ubuntu-latest
         steps:
+            - name: Download Build Artifact
+              uses: actions/download-artifact@v4
+              with:
+                name: dragon-file-artifact
+                path: dragon.txt
+                
             - name: Read file
               run: cat dragon.txt
 
