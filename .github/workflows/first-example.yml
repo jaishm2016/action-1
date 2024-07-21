@@ -9,6 +9,9 @@ jobs:
             - name: Welcome to GHA
               run: echo Welcome to GHA
             
+            - name: Checkout My Repo
+              uses: actions/checkout@v4
+              
             - name: List the files
               run: ls
 
