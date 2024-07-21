@@ -11,6 +11,8 @@ jobs:
 
             - name: List the files
               run: ls -altr
-              
+
             - name: Executing the Script
-              run: ./ascii-script.sh
+              run: |
+                chmod +x ascii-script.sh
+                ./ascii-script.sh
