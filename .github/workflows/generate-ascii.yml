@@ -16,7 +16,7 @@ jobs:
             - name: Upload Build Artifact
               uses: actions/upload-artifact@v4
               with:
-                name: dragon-file-artifact
+                name: my-artwork
                 path: dragon.txt
 
 
@@ -27,12 +27,12 @@ jobs:
             - name: Download Build Artifact
               uses: actions/download-artifact@v4
               with:
-                name: dragon-file-artifact
+                name: my-artwork
                 path: dragon.txt
 
             - name: Test file exists
-            #  run: grep -i "dragon" dragon.txt
-              run: ls -al
+              run: grep -i "dragon" dragon.txt
+
 
     deploy_job_3:
         needs: [test_job_2]
@@ -41,7 +41,7 @@ jobs:
             - name: Download Build Artifact
               uses: actions/download-artifact@v4
               with:
-                name: dragon-file-artifact
+                name: my-artwork
                 path: dragon.txt
 
             - name: Read file
